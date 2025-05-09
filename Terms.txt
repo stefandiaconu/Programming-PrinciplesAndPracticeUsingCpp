@@ -1,0 +1,3 @@
+// - Comment token
+<< - Output operator
+C++ - Programming language
