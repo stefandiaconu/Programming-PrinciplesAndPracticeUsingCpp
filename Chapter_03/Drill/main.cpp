@@ -1,0 +1,14 @@
+//
+// Created by Stefan Diaconu on 13/05/2025.
+//
+
+#include "../../std_lib_facilities.h"
+
+int main()
+{
+    cout << "Please enter your first name (followed by 'enter'):\n";
+    string first_name;
+    cin >> first_name;
+    cout << "Hello, " << first_name << "!\n";
+    return 0;
+}
