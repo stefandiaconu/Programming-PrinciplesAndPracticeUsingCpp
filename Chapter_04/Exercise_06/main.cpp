@@ -4,7 +4,7 @@
 
 #include "../../std_lib_facilities.h"
 
-int convert_to_digit(string s)
+int convert_to_digit(const string &s)
 {
     int digit = 0;
     if (s == "zero") digit = 0;
