@@ -39,3 +39,18 @@ void swap_cr(const int &a,const int &b)
     // a = b;
     // b = temp;
 }
+
+void X::print()
+{
+    cout << var << endl;
+}
+
+void Y::print()
+{
+    cout << var << endl;
+}
+
+void Z::print()
+{
+    cout << var << endl;
+}
