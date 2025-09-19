@@ -1,10 +1,4 @@
-cmake_minimum_required(VERSION 3.31)
-
-set(CMAKE_CXX_STANDARD 20)
-
-project(main)
-
-add_executable(main main.cpp
+add_executable(ch_08_drill ch_08_drill.cpp
         my.h
         my.cpp
 )

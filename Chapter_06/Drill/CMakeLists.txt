@@ -1,5 +1,1 @@
-cmake_minimum_required(VERSION 3.31)
-
-project(main)
-
-add_executable(main main.cpp)
+add_executable(ch_06_drill ch_06_drill.cpp)

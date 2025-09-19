@@ -1,0 +1,2 @@
+add_executable(ch_12_drill ch_12_drill.cpp)
+target_link_libraries(ch_12_drill PRIVATE Graph_lib)

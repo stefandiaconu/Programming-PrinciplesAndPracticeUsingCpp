@@ -1,6 +1,1 @@
-cmake_minimum_required(VERSION 3.10)
-
-project(main)
-
-add_executable(main
-        main.cpp)
+add_executable(ch_03_ex_07 ch_03_ex_07.cpp)
