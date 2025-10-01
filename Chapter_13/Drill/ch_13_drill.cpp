@@ -2,122 +2,67 @@
 // Created by Stefan Diaconu on 18/09/2025.
 //
 
+#include <iostream>
 #include "../../Headers/Simple_window.h"
 #include "../../Headers/Graph.h"
-#include <iostream>
+#include <random>
 
-int main()
-{
-    try {
-        using namespace Graph_lib;
+int main(int argc, const char * argv[]) {
+    // insert code here...
 
-        Point tl{100,100};
-        Simple_window win{tl,600,400,"Chapter_13 My Window"};
+    // Create window
+    Point tl{100,100};
+    Simple_window win{tl,1000,800,"My Window"};
 
-        Axis xa{Axis::x,Point{20,300},280,10,"x axis"};     // make an Axis
-                // an Axis is a kind of Shape
-                // Axis::x means horizontal
-                // starting at (20,300)
-                // 280 pixel long
-                // 10 "notches"
-                // label the axis "x axis"
-        win.attach(xa);                                     // attach 'xa' to the window, 'win'
-        win.set_label("Chapter_13 My Window #2");                      // relabel the window
+    // Create grid
+    int x_grid = 100;
+    int y_grid = 100;
+    Lines grid;
+    for (int i=x_grid; i<=800; i+=x_grid) {
+        grid.add(Point{i,0}, Point{i,800});
+    }
+
+    for (int j=y_grid; j<=800; j+=y_grid) {
+        grid.add(Point{0,j}, Point{800,j});
+    }
+    win.attach(grid);
+
+    Vector_ref<Rectangle> recs;
+    for (int i=0; i<=800; i+=100) {
+        for (int j=0; j<=800; j+=100) {
+            recs.push_back(new Rectangle{Point{i,j},x_grid,y_grid});
+            recs[recs.size()-1].set_fill_color(Color::red);
+            win.attach(recs[recs.size()-1]);
+            i+=x_grid;
+        }
+    }
+    win.wait_for_button();
+
+    // Create image
+    Image i1{Point{200,0},"../../../Assets/seal.jpg"};
+    win.attach(i1);
+    Image i2{Point{0,200},"../../../Assets/seal.jpg"};
+    win.attach(i2);
+    Image i3{Point{400,600},"../../../Assets/seal.jpg"};
+    win.attach(i3);
+
+    // Move image from square to square
+    Image i4{Point{x_grid,y_grid},"../../../Assets/smile.jpg"};
+    win.attach(i4);
+    int x = 0;
+    int y = 0;
+    int dx = 0;
+    int dy = 0;
+    int count = 0;
+    while (count < 10) {
+        x = rand() % 8;
+        y = rand() % 8;
+        dx = 100*x - i4.point(0).x;
+        dy = 100*y - i4.point(0).y;
+        i4.move(dx,dy);
+        //win.resize(1000,800);
+        count++;
         win.wait_for_button();
-
-        Axis ya{Axis::y,Point{20,300},280,10,"y axis"};
-        ya.set_color(Color::cyan);                          // choose a color
-        ya.label.set_color(Color::dark_red);                // choose a color for the text
-        win.attach(ya);
-        win.set_label("Chapter_13 My Window #3");
-        win.wait_for_button();
-
-        Function sine {sin,0,100,Point{20,150},1000,50,50};     // sine curve
-                // plot 'sin' in the range [0:100] with (0,0) at (20,150)
-                // using 1000 points, scale x values *50, scale y values *50
-        win.attach(sine);
-        win.set_label("Chapter_13 My Window #4");
-        win.wait_for_button();
-
-        sine.set_color(Color::blue);
-
-        Polygon poly;
-        poly.add(Point{300,200});
-        poly.add(Point{350,100});
-        poly.add(Point{400,200});
-
-        poly.set_color(Color::red);
-        poly.set_style(Line_style::dash);
-        win.attach(poly);
-        win.set_label("Chapter_13 My Window #5");
-        win.wait_for_button();
-
-        Rectangle r {Point{200,200},100,50};                // top left corner, width, height
-        win.attach(r);
-        win.set_label("Chapter_13 My Window #6");
-        win.wait_for_button();
-
-        Closed_polyline poly_rect;
-        poly_rect.add(Point{100,50});
-        poly_rect.add(Point{200,50});
-        poly_rect.add(Point{200,100});
-        poly_rect.add(Point{100,100});
-        win.attach(poly_rect);
-
-        poly_rect.add(Point{50,75});
-
-        r.set_fill_color(Color::yellow);                    // color the inside of the rectangle
-        poly.set_style(Line_style(Line_style::dash,4));
-        poly_rect.set_style(Line_style(Line_style::dash,2));
-        poly_rect.set_fill_color(Color::green);
-        win.set_label("Chapter_13 My Window #7");
-        win.wait_for_button();
-
-        Text t {Point{150,150},"Hello, graphical world!"};
-        win.attach(t);
-        win.set_label("Chapter_13 My Window #8");
-        win.wait_for_button();
-
-        t.set_font(Font::times_bold);
-        t.set_font_size(20);
-        win.set_label("Chapter_13 My Window #9");
-        win.wait_for_button();
-
-        Image ii {Point{100,50},"image.jpg"};
-        win.attach(ii);
-        win.set_label("Chapter_13 My Window #10");
-        win.wait_for_button();
-
-        ii.move(100,200);
-        win.set_label("Chapter_13 My Window #11");
-        win.wait_for_button();
-
-        Circle c {Point{100,200},50};
-        Ellipse e {Point{100,200},75,25};
-        e.set_color(Color::dark_red);
-        Mark m {Point{100,200},'x'};
-
-        ostringstream oss;
-        oss << "Screen size: " << x_max() << "*" << y_max()
-            <<  "; window size: " << win.x_max() << "*" << win.y_max();
-        Text sizes {Point{100,20},oss.str()};
-
-        Image cal {Point{225,225},"snow.gif"};
-        cal.set_mask(Point{40,40}, 200, 150);
-
-        win.attach(c);
-        win.attach(m);
-        win.attach(e);
-
-        win.attach(sizes);
-        win.attach(cal);
-        win.set_label("Chapter_13 My Window #12");
-        win.wait_for_button();
-
-    } catch (exception e) {
-        cerr << "Exception: " << e.what() << endl;
-    } catch (...) {
-        cerr << "Exception" << endl;
     }
 
     return 0;
