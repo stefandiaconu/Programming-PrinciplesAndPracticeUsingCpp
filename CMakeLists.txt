@@ -47,3 +47,5 @@
  add_subdirectory(Chapter_14/Drill)
  add_subdirectory(Chapter_15/Drill)
  add_subdirectory(Chapter_16/Drill)
+ add_subdirectory(Chapter_17/Drill_A)
+ add_subdirectory(Chapter_17/Drill_B)

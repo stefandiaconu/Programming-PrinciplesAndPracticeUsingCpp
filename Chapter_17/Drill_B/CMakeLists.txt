@@ -1,0 +1,1 @@
+add_executable(ch_17_drill_B ch_17_drill_B.cpp)
