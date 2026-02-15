@@ -49,3 +49,5 @@
  add_subdirectory(Chapter_16/Drill)
  add_subdirectory(Chapter_17/Drill_A)
  add_subdirectory(Chapter_17/Drill_B)
+ add_subdirectory(Chapter_18/Drill_Array)
+ add_subdirectory(Chapter_18/Drill_Vector)
